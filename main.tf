@@ -1,6 +1,6 @@
 # TENACITY VPC
 resource "aws_vpc" "tenacity-vpc" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = var.vpc_cidr
   instance_tenancy     = "default"
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -13,7 +13,7 @@ resource "aws_vpc" "tenacity-vpc" {
 # Public subnets
 resource "aws_subnet" "Prod-pub-sub1" {
   vpc_id            = aws_vpc.tenacity-vpc.id
-  cidr_block        = "10.0.10.0/24"
+  cidr_block        = var.public_subnet_1_cidr
   availability_zone = "eu-west-2a"
 
   tags = {
@@ -23,7 +23,7 @@ resource "aws_subnet" "Prod-pub-sub1" {
 
 resource "aws_subnet" "Prod-pub-sub2" {
   vpc_id            = aws_vpc.tenacity-vpc.id
-  cidr_block        = "10.0.11.0/24"
+  cidr_block        = var.public_subnet_2_cidr
   availability_zone = "eu-west-2b"
 
   tags = {
@@ -34,7 +34,7 @@ resource "aws_subnet" "Prod-pub-sub2" {
 # Private subnets
 resource "aws_subnet" "Prod-priv-sub1" {
   vpc_id            = aws_vpc.tenacity-vpc.id
-  cidr_block        = "10.0.12.0/24"
+  cidr_block        = var.private_subnet_1_cidr
   availability_zone = "eu-west-2a"
 
   tags = {
@@ -44,7 +44,7 @@ resource "aws_subnet" "Prod-priv-sub1" {
 
 resource "aws_subnet" "prod-priv-sub2" {
   vpc_id            = aws_vpc.tenacity-vpc.id
-  cidr_block        = "10.0.13.0/24"
+  cidr_block        = var.private_subnet_2_cidr
   availability_zone = "eu-west-2c"
 
   tags = {
